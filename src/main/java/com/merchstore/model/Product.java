@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+
 @Data
 @Entity
 public class Product {
@@ -18,5 +19,5 @@ public class Product {
     private String description;
     private Float price;
     private Integer quantity;
-
+    private String category;
 }
