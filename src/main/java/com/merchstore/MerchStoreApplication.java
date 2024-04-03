@@ -13,4 +13,4 @@ public class MerchStoreApplication {
 }
 
 //insert into product (category, description, image_url, price, quantity, title)
-//values ('apparel', 'T-shirt descriptoin', 'images/zeppelin_img.jpg', 50, 100, 'Led Zeppelin T-shirt gray')
+//values ('apparel', 'T-shirt descriptoin', 'images/led_zeppelin_gray_tshirt.jpg', 50, 100, 'Led Zeppelin T-shirt gray')

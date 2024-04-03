@@ -22,4 +22,7 @@ public class ProductService {
             return productRepository.findProductsByCategory(category);
     }
 
+    public Product getById(Long id) {
+        return productRepository.findById(id).orElseThrow();
+    }
 }
