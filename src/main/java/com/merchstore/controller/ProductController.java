@@ -13,10 +13,18 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping(value = { "/collections/", "/collections"})
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView("home_product_list");
+        modelAndView.addObject("products", productService.getAllProducts());
+        return modelAndView;
+    }
+
+
     @GetMapping("/collections/{category}")
     public ModelAndView getProductList(@PathVariable("category") String category) {
         ModelAndView modelAndView = new ModelAndView("home_product_list");
-        modelAndView.addObject("products", productService.getProducts(category));
+        modelAndView.addObject("products", productService.getProductsByCategory(category));
         return modelAndView;
     }
 

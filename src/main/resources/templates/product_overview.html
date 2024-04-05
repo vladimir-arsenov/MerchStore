@@ -2,9 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title th:text="${product.title}"></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .product-suggestions::-webkit-scrollbar {
+            display: none;
+        }
 
+        @layer utilities {
+            /* Chrome, Safari and Opera */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .no-scrollbar {
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+        }
+    </style>
+</head>
+<body class="bg-rose-50">
+
+<div th:replace="/header :: nav"></div>
+<hr style="border-color:black;"/>
+
+<div class=" bg-rose-50 container mx-auto py-8">
+    <div class="md:flex justify-center">
+        <div class="md:w-1/2">
+            <img alt="Product Image" class="mx-auto rounded-lg shadow-lg" src="" style="width: 600px; height: 500px"
+                 th:src="@{'/' + ${product.imageUrl}}">
+        </div>
+        <div class="md:w-1/2 mr-4 mt-8 md:mt-0 md:ml-8">
+            <h1 class="text-6xl  font-semibold mb-7" th:text="${product.title}">Product Name</h1>
+            <p class="text-gray-700 text-2xl mb-7" th:text="${product.description}">Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Nullam scelerisque felis ut libero efficitur, at euismod sapien
+                convallis.</p>
+            <p class="text-gray-800 font-bold text-4xl mb-10" th:text="${product.price} + '$'">$99.99</p>
+            <div class="flex items-center mb-10">
+                <span class="text-gray-700 text-xl mr-2">Quantity:</span>
+                <input class="w-16 h-10 border rounded-lg px-4" type="number" value="1">
+            </div>
+            <button class="text-white text-3xl py-2 h-1/6 w-full tart px-4 rounded-lg bg-rose-500 ">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class=" product-suggestions row-span-5 ml-28 mt-8">
+        <h1 class="text-4xl ml-6 font-semibold mb-7">People also watch: </h1>
+        <div class="grid grid-rows-1 justify-start grid-flow-col gap-4 p-3 no-scrollbar overflow-auto">
+            <div class="hover:opacity-80 w-60 bg-white rounded-lg shadow-lg overflow-hidden">
+                <img alt="Product Image" class="w-full" src="">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold mb-2">Product 1</h2>
+                </div>
+            </div>
+            <!-- Add more product items here -->
+        </div>
+    </div>
+</div>
+
+<hr style="border-color:black;"/>
+<div th:replace="/footer :: footer"></div>
 </body>
 </html>

@@ -14,12 +14,12 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
-    public List<Product> getProducts(String category) {
-        if (category.isEmpty())
-            return productRepository.findAll();
-        else
-            return productRepository.findProductsByCategory(category);
+    public List<Product> getProductsByCategory(String category) {
+        return productRepository.findProductsByCategory(category);
     }
 
     public Product getById(Long id) {
