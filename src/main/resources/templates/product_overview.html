@@ -35,7 +35,7 @@
 <div class=" bg-rose-50 container mx-auto py-8">
     <div class="md:flex justify-center">
         <div class="md:w-1/2">
-            <img alt="Product Image" class="mx-auto rounded-lg shadow-lg" src="" style="width: 600px; height: 500px"
+            <img alt="Product Image" class="mx-auto rounded-lg shadow-lg" src="" style="width: 500px; height: 500px"
                  th:src="@{'/' + ${product.imageUrl}}">
         </div>
         <div class="md:w-1/2 mr-4 mt-8 md:mt-0 md:ml-8">
@@ -43,7 +43,7 @@
             <p class="text-gray-700 text-2xl mb-7" th:text="${product.description}">Lorem ipsum dolor sit amet,
                 consectetur adipiscing elit. Nullam scelerisque felis ut libero efficitur, at euismod sapien
                 convallis.</p>
-            <p class="text-gray-800 font-bold text-4xl mb-10" th:text="${product.price} + '$'">$99.99</p>
+            <p class="text-gray-800 font-bold text-4xl mb-10" th:text="'$' + ${product.price} + ' USD'">$99.99</p>
             <div class="flex items-center mb-10">
                 <span class="text-gray-700 text-xl mr-2">Quantity:</span>
                 <label>
@@ -55,12 +55,12 @@
     </div>
 
     <div class=" product-suggestions row-span-5 ml-28 mt-8">
-        <h1 class="text-4xl ml-6 font-semibold mb-7">People also watch: </h1>
-        <div class="grid grid-rows-1 justify-start grid-flow-col gap-4 p-3 no-scrollbar overflow-auto">
-            <div class="hover:opacity-80 w-60 bg-white rounded-lg shadow-lg overflow-hidden">
-                <img alt="Product Image" class="w-full" src="">
+        <h1 class="text-4xl ml-6 font-semibold mb-7">Similar products: </h1>
+        <div  class="grid grid-rows-1 justify-start grid-flow-col gap-4 p-3 no-scrollbar overflow-auto">
+            <div th:each="suggestion: ${suggestions}" class="hover:opacity-80 w-60 bg-white rounded-lg shadow-lg overflow-hidden">
+                <img th:src="@{'/' + ${suggestion.imageUrl}}" alt="Product Image" class="w-full h-2/3 " src="">
                 <div class="p-4">
-                    <h2 class="text-xl font-semibold mb-2">Product 1</h2>
+                    <h2 th:text="${suggestion.title}" class="text-xl font-semibold mb-2">Product 1</h2>
                 </div>
             </div>
             <!-- Add more product items here -->

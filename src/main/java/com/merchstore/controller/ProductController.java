@@ -23,6 +23,9 @@ public class ProductController {
 
     @GetMapping("/collections/search")
     public ModelAndView search(@PathParam("q") String q) {
+        if (q.isEmpty())
+            return new ModelAndView("redirect:/collections");
+
         ModelAndView modelAndView = new ModelAndView("home_product_list");
         modelAndView.addObject("q", q);
         modelAndView.addObject("products", productService.search(q));
@@ -31,7 +34,7 @@ public class ProductController {
 
 
     @GetMapping("/collections/{category}")
-    public ModelAndView getProductList(@PathVariable("category") String category) {
+    public ModelAndView getProductsByCategory(@PathVariable("category") String category) {
         ModelAndView modelAndView = new ModelAndView("home_product_list");
         modelAndView.addObject("products", productService.getProductsByCategory(category));
         return modelAndView;
@@ -41,6 +44,7 @@ public class ProductController {
     public ModelAndView productOverview(@PathVariable("id") Long id, @PathVariable String category) {
         ModelAndView modelAndView = new ModelAndView("product_overview");
         modelAndView.addObject("product", productService.getById(id));
+        modelAndView.addObject("suggestions", productService.getSuggestions(id));
         return modelAndView;
     }
 

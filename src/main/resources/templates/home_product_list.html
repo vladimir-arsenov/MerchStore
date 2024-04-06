@@ -23,6 +23,7 @@
             <!-- Product card... -->
             <div th:each="product: ${products}">
                 <a class="group"
+
                    th:href="@{/collections/{category}/products/{id}(category=${product.category}, id=${product.id})}">
                     <div class="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-gray-200">
                         <img class="w-full object-cover object-center group-hover:opacity-75"
@@ -31,7 +32,7 @@
                     </div>
                     <p></p>
                     <h3 class="mt-1 text-lg font-medium text-gray-900" th:text="${product.title}">Title</h3>
-                    <p class="mt-4 text-sm text-gray-700" th:text="${product.price} + '$'">Price</p>
+                    <p class="mt-4 text-lg text-gray-700" th:text="'$' + ${product.price}">Price</p>
                 </a>
             </div>
             <!-- Product card end... -->
