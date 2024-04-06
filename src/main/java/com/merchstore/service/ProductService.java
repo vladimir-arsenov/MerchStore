@@ -25,4 +25,9 @@ public class ProductService {
     public Product getById(Long id) {
         return productRepository.findById(id).orElseThrow();
     }
+
+    public List<Product> search(String query) {
+        return productRepository.search(query);
+    }
+
 }

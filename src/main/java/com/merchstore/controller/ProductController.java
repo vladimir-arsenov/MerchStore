@@ -1,6 +1,7 @@
 package com.merchstore.controller;
 
 import com.merchstore.service.ProductService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,14 @@ public class ProductController {
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("home_product_list");
         modelAndView.addObject("products", productService.getAllProducts());
+        return modelAndView;
+    }
+
+    @GetMapping("/collections/search")
+    public ModelAndView search(@PathParam("q") String q) {
+        ModelAndView modelAndView = new ModelAndView("home_product_list");
+        modelAndView.addObject("q", q);
+        modelAndView.addObject("products", productService.search(q));
         return modelAndView;
     }
 
