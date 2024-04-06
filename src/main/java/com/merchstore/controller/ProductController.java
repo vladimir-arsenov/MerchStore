@@ -47,5 +47,4 @@ public class ProductController {
         modelAndView.addObject("suggestions", productService.getSuggestions(id));
         return modelAndView;
     }
-
 }
