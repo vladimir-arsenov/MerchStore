@@ -2,6 +2,7 @@ package com.merchstore.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Product {
     private Integer quantity;
     private String category;
 
+    @ToString.Exclude // to avoid recursion
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_order",
             joinColumns = @JoinColumn(name = "order_id"),

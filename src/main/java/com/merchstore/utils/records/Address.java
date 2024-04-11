@@ -1,3 +1,3 @@
-package com.merchstore.model.records;
+package com.merchstore.utils.records;
 
 public record Address(String address, String apartment, String city, String state, String zip) { }

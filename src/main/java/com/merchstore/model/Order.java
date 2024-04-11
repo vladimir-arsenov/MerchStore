@@ -3,6 +3,7 @@ package com.merchstore.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -18,9 +19,11 @@ public class Order {
     private String card;
     private String address;
 
+    @ToString.Exclude // to avoid recursion
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
 
     @ManyToMany(mappedBy = "orders")
     private List<Product> items;

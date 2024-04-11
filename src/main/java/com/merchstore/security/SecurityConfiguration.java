@@ -28,8 +28,9 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/collections/**", "/register/**").permitAll()
-                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/images/**", "/css/**").permitAll()
+                        .requestMatchers("/collections/**", "/register", "/login").permitAll()
+                        .requestMatchers("/profile", "/checkout").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer

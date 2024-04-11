@@ -1,7 +1,7 @@
 package com.merchstore.controller;
 
-import com.merchstore.model.records.Address;
-import com.merchstore.model.records.Card;
+import com.merchstore.utils.records.Address;
+import com.merchstore.utils.records.Card;
 import com.merchstore.model.Customer;
 import com.merchstore.model.Order;
 import com.merchstore.service.CustomerService;
