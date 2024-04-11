@@ -44,13 +44,18 @@
                 consectetur adipiscing elit. Nullam scelerisque felis ut libero efficitur, at euismod sapien
                 convallis.</p>
             <p class="text-gray-800 font-bold text-4xl mb-10" th:text="'$' + ${product.price} + ' USD'">$99.99</p>
+            <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+            <form  method="post" target="dummyframe" action="/cart">
             <div class="flex items-center mb-10">
                 <span class="text-gray-700 text-xl mr-2">Quantity:</span>
                 <label>
-                    <input class="w-16 h-10 border rounded-lg px-4" type="number" value="1">
+                    <input name="productQuantity" class="w-16 h-10 border rounded-lg px-4" type="number" value="1">
                 </label>
             </div>
-            <button class="text-white text-3xl py-2 h-1/6 w-full tart px-4 rounded-lg bg-rose-500 ">Add to Cart</button>
+                <input type = "hidden" name = "productId" th:value="${product.id}" />
+                <button type="submit" class="text-white text-3xl py-2 h-1/6 w-full tart px-4 rounded-lg bg-rose-500 ">Add to Cart</button>
+            </form>
+
         </div>
     </div>
 

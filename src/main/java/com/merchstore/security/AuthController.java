@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+
+// TODO use service and move to CustomerController
 @RestController
 public class AuthController {
     private final CustomerRepository customerRepository;
@@ -24,11 +26,11 @@ public class AuthController {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer.setRole("USER");
         customerRepository.save(customer);
-        return new ModelAndView("redirect:/user");
+        return new ModelAndView("redirect:/user/" + customer.getId());
     }
 
     @GetMapping("/register")
-    public ModelAndView registration(ModelAndView model) {
+    public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView("register");
         modelAndView.addObject("customer", new Customer());
         return modelAndView;

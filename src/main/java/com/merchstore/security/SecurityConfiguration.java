@@ -27,18 +27,16 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/collections/**", "/register/**").permitAll();
-                    registry.requestMatchers("/user/**").hasRole("USER");
-                    registry.anyRequest().authenticated();
-                })
-                .formLogin(httpSecurityFormLoginConfigurer -> {
-                    httpSecurityFormLoginConfigurer
-                            .loginPage("/login")
-                            .usernameParameter("email")
-                            .successHandler(new AuthenticationSuccessHandler())
-                            .permitAll();
-                })
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/collections/**", "/register/**").permitAll()
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .successHandler(new AuthSuccessHandler())
+                        .permitAll())
                 .build();
     }
 

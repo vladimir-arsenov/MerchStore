@@ -1,10 +1,9 @@
 package com.merchstore.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 
 @Data
@@ -20,4 +19,11 @@ public class Product {
     private Float price;
     private Integer quantity;
     private String category;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "product_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Order> orders;
 }

@@ -8,11 +8,11 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 import java.io.IOException;
 
-public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        setDefaultTargetUrl("/user");
+        setDefaultTargetUrl("/user/1");
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
