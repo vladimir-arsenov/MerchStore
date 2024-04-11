@@ -1,13 +1,15 @@
 package com.merchstore.controller;
 
-import com.merchstore.utils.records.Address;
-import com.merchstore.utils.records.Card;
 import com.merchstore.model.Customer;
-import com.merchstore.model.Order;
 import com.merchstore.service.CustomerService;
 import com.merchstore.service.OrderService;
+import com.merchstore.utils.records.Address;
+import com.merchstore.utils.records.Card;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
@@ -22,29 +24,37 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/checkout")
-    public ModelAndView checkout(@RequestBody Order order, @RequestBody Address address, @RequestBody Card card) {
-        orderService.checkout(order, address, card);
-        return new ModelAndView("product_overview");
+    @PostMapping(value = "/checkout", params = "complete")
+    public ModelAndView completeOrder(@ModelAttribute("customer") Customer customer,
+                                      @ModelAttribute("address") Address address,
+                                      @ModelAttribute("card") Card card
+    ) {
+        orderService.completeOrder(address, card);
+        return new ModelAndView("redirect:/profile");
+    }
+    @PostMapping(value = "/checkout", params = "cancel")
+    public ModelAndView cancelOrder(@ModelAttribute("customer") Customer customer,
+                                    @ModelAttribute("address") Address address,
+                                    @ModelAttribute("card") Card card
+    ) {
+        orderService.cancelOrder();
+        return new ModelAndView("redirect:/collections");
     }
 
-    @GetMapping("/checkout")
-    public ModelAndView checkout() {
+    @GetMapping("/cart")
+    public ModelAndView goToCart() {
         ModelAndView modelAndView = new ModelAndView("checkout");
         Customer customer = customerService.getAuthorizedCustomer();
-        modelAndView.addObject("order", orderService.getPendingOrder(customer));
-        modelAndView.addObject("customer", customer);
-        log.info("CUSTOMER: " + customer);
-        log.info("ORDER FROM GET PENDING ORDER: " + orderService.getPendingOrder(customer).getItems());
 
-        return modelAndView;
+        return modelAndView.addObject("order", orderService.getOrCreatePendingOrder(customer))
+                .addObject("customer", customer)
+                .addObject("address", new Address())
+                .addObject("card", new Card());
+
     }
 
     @PostMapping("/cart")
     public void addToCart(@ModelAttribute("productId") Long productId, @ModelAttribute("productQuantity") Integer quantity) {
-        System.out.println("CONTROLLER" +productId +  " " + quantity);
         orderService.addToCart(productId, quantity);
-
-//        return new ModelAndView("ch");
     }
 }

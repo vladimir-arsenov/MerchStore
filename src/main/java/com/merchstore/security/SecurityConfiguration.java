@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/images/**", "/css/**").permitAll()
                         .requestMatchers("/collections/**", "/register", "/login").permitAll()
-                        .requestMatchers("/profile", "/checkout").hasRole("USER")
+                        .requestMatchers("/profile", "/cart").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer

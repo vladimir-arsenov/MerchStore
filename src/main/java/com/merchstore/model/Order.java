@@ -2,14 +2,16 @@ package com.merchstore.model;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "`Order`")
+@Table(name = "orders")
 public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

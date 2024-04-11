@@ -17,7 +17,7 @@ public class CustomerController {
 
     @GetMapping("/profile")
     public ModelAndView profile() {
-        ModelAndView modelAndView = new ModelAndView("customer_profile");
+        ModelAndView modelAndView = new ModelAndView("profile");
         Customer customer = customerService.getAuthorizedCustomer();
         modelAndView.addObject("customer", customer);
         return modelAndView;

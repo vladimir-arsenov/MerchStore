@@ -16,7 +16,7 @@ public class ProductController {
 
     @GetMapping(value = { "/collections/", "/collections"})
     public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView("home_product_list");
+        ModelAndView modelAndView = new ModelAndView("product_list");
         modelAndView.addObject("products", productService.getAllProducts());
         return modelAndView;
     }
@@ -26,7 +26,7 @@ public class ProductController {
         if (q.isEmpty())
             return new ModelAndView("redirect:/collections");
 
-        ModelAndView modelAndView = new ModelAndView("home_product_list");
+        ModelAndView modelAndView = new ModelAndView("product_list");
         modelAndView.addObject("q", q);
         modelAndView.addObject("products", productService.search(q));
         return modelAndView;
@@ -35,7 +35,7 @@ public class ProductController {
 
     @GetMapping("/collections/{category}")
     public ModelAndView getProductsByCategory(@PathVariable("category") String category) {
-        ModelAndView modelAndView = new ModelAndView("home_product_list");
+        ModelAndView modelAndView = new ModelAndView("product_list");
         modelAndView.addObject("products", productService.getProductsByCategory(category));
         return modelAndView;
     }

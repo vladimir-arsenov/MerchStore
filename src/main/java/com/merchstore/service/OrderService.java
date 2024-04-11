@@ -9,6 +9,8 @@ import com.merchstore.repository.OrderRepository;
 import com.merchstore.utils.OrderStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class OrderService {
     private final CustomerService customerService;
@@ -22,36 +24,49 @@ public class OrderService {
     }
 
 
-    public Order getPendingOrder(Customer customer) {
+    public Order getOrCreatePendingOrder(Customer customer) {
         for (Order order : customer.getOrders())
             if (order.getStatus().equals(OrderStatus.PENDING))
                 return order;
 
         // no pending order - create new order
-        Order newOrder = new Order();
-        newOrder.setCustomer(customer);
+        Order newOrder = Order.builder()
+                .status(OrderStatus.PENDING)
+                .price(0.0)
+                .items(new ArrayList<>())
+                .customer(customer)
+                .build();
+
         customer.getOrders().add(newOrder);
 
         return orderRepository.save(newOrder);
     }
 
 
-    public void checkout(Order order, Address address, Card card) {
+    public void completeOrder(Address address, Card card) {
+        Order order = getOrCreatePendingOrder(customerService.getAuthorizedCustomer());
         order.setAddress(address.toString());
         order.setCard(card.toString());
+        order.setStatus(OrderStatus.PROCESSING);
         orderRepository.save(order);
     }
 
 
     public void addToCart(Long productId, Integer quantity) {
         Product product = productService.getById(productId);
-        Order order = getPendingOrder(customerService.getAuthorizedCustomer());
+        Order order = getOrCreatePendingOrder(customerService.getAuthorizedCustomer());
 
         order.getItems().add(product);
         order.setPrice(order.getPrice() + product.getPrice());
         product.getOrders().add(order);
         product.setQuantity(quantity);
 
-//        orderRepository.save(order);
+        orderRepository.save(order);
+    }
+
+    public void cancelOrder() {
+        Order order = getOrCreatePendingOrder(customerService.getAuthorizedCustomer());
+        order.getItems().forEach(product -> product.getOrders().remove(order));
+        orderRepository.delete(order);
     }
 }

@@ -24,8 +24,8 @@
                             <div>
                                 <h3 class="text-base text-black"  th:text="${item.title}">Naruto: Split Sneakers</h3>
                                 <ul class="mt-4 space-y-3 text-xs text-black">
-                                    <li class="flex flex-wrap gap-4"  th:text="${item.quantity}" >Quantity <span class="ml-auto">2</span></li>
-                                    <li class="flex flex-wrap gap-4"  th:text="${item.price}*${item.quantity}">Total Price <span class="ml-auto">$40</span></li>
+                                    <li class="flex flex-wrap gap-4"  th:text="'Quantity:' + ${item.quantity}" >Quantity <span class="ml-auto">2</span></li>
+                                    <li class="flex flex-wrap gap-4"  th:text="'Price:' + ${item.price}*${item.quantity}">Total Price<span class="ml-auto">$40</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -43,14 +43,14 @@
                     <h3 class="mb-6 text-lg font-bold text-[#333]">Personal Details</h3>
                     <div class="grid gap-6 sm:grid-cols-2">
                         <div class="relative flex items-center">
-                            <input th:value="${customer.name}" type="text" placeholder="Name" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                            <input th:value="${customer.name}" name="name" type="text" placeholder="Name" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="absolute right-4 h-[18px] w-[18px]" viewBox="0 0 24 24">
                                 <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
                                 <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000"></path>
                             </svg>
                         </div>
                         <div class="relative flex items-center">
-                            <input th:value="${customer.email}"  type="email" placeholder="Email" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                            <input th:value="${customer.email}" name="email" type="email" placeholder="Email" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="absolute right-4 h-[18px] w-[18px]" viewBox="0 0 682.667 682.667">
                                 <defs>
                                     <clipPath id="a" clipPathUnits="userSpaceOnUse">
@@ -64,7 +64,7 @@
                             </svg>
                         </div>
                         <div class="relative flex items-center">
-                            <input th:value="${customer.phone}"  type="number" placeholder="Phone No." class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                            <input  th:value="${customer.phone}"  name="phone" type="number" placeholder="Phone No." class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
 
                             <svg fill="#bbb" class="absolute right-4 h-[18px] w-[18px]" viewBox="0 0 64 64">
                                 <path d="m52.148 42.678-6.479-4.527a5 5 0 0 0-6.963 1.238l-1.504 2.156c-2.52-1.69-5.333-4.05-8.014-6.732-2.68-2.68-5.04-5.493-6.73-8.013l2.154-1.504a4.96 4.96 0 0 0 2.064-3.225 4.98 4.98 0 0 0-.826-3.739l-4.525-6.478C20.378 10.5 18.85 9.69 17.24 9.69a4.69 4.69 0 0 0-1.628.291 8.97 8.97 0 0 0-1.685.828l-.895.63a6.782 6.782 0 0 0-.63.563c-1.092 1.09-1.866 2.472-2.303 4.104-1.865 6.99 2.754 17.561 11.495 26.301 7.34 7.34 16.157 11.9 23.011 11.9 1.175 0 2.281-.136 3.29-.406 1.633-.436 3.014-1.21 4.105-2.302.199-.199.388-.407.591-.67l.63-.899a9.007 9.007 0 0 0 .798-1.64c.763-2.06-.007-4.41-1.871-5.713z" data-original="#000000"></path>
@@ -75,20 +75,20 @@
                 <div class="mt-6">
                     <h3 class="mb-6 text-lg font-bold text-[#333]">Shipping Address</h3>
                     <div class="grid gap-6 sm:grid-cols-2">
-                        <input type="text" placeholder="Address Line" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input type="text" placeholder="City" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input type="text" placeholder="State" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input type="text" placeholder="Zip Code" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${address.address}" type="text" name="address" placeholder="Address Line" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${address.city}" type="text" name="city" placeholder="City" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${address.state}" type="text" name="state" placeholder="State" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${address.zip}" type="text" name="zip" placeholder="Zip Code" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
                     </div>
                     <h3 class="mt-6 mb-6 text-lg font-bold text-[#333]">Credit Card</h3>
                     <div class="grid gap-6 sm:grid-cols-2">
-                        <input type="text" placeholder="XXXX  XXXX  XXXX  XXXX" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input type="text" placeholder="MM / YY" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input type="text" placeholder="CVV" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${card.number}" type="text" name="number" placeholder="XXXX  XXXX  XXXX  XXXX" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${card.MY}" type="text" name="MY" placeholder="MM / YY" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${card.cvv}" type="text" name="cvv" placeholder="CVV" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
                     </div>
                     <div class="mt-10 flex gap-6 max-sm:flex-col">
-                        <button type="button" class="w-full rounded-md border-2 bg-transparent px-6 py-3 text-sm font-semibold text-[#333] hover:bg-gray-100">Cancel</button>
-                        <button type="button" class="w-full rounded-md bg-[#333] px-6 py-3 text-sm font-semibold text-white hover:bg-[#222]">Complete Purchase</button>
+                        <input type="submit"  name="cancel"  value="Cancel" class="w-full rounded-md border-2 bg-transparent px-6 py-3 text-sm font-semibold text-[#333] hover:bg-gray-100"/>
+                        <input type="submit" name="complete" value="Complete Purchase" class="w-full rounded-md bg-[#333] px-6 py-3 text-sm font-semibold text-white hover:bg-[#222]" />
                     </div>
                 </div>
             </form>

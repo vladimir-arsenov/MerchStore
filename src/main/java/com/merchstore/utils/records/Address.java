@@ -1,3 +1,12 @@
 package com.merchstore.utils.records;
 
-public record Address(String address, String apartment, String city, String state, String zip) { }
+import lombok.Data;
+
+@Data
+public class Address {
+    private String address;
+    private  String apartment;
+    private  String city;
+    private  String state;
+    private  String zip;
+}

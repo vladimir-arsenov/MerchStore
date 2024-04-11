@@ -1,3 +1,13 @@
 package com.merchstore.utils.records;
 
-public record Card(String number, String my, String cvv) {}
+
+import lombok.Data;
+
+@Data
+public final class Card {
+    private String number;
+    private String mY;
+    private String cvv;
+
+
+}
