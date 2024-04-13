@@ -2,9 +2,6 @@ package com.merchstore.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
-
-import java.util.List;
 
 
 @Data
@@ -18,15 +15,15 @@ public class Product {
     private String imageUrl;
     private String title;
     private String description;
-    private Float price;
-    private Integer quantity;
+    private double price;
+    private int quantity;
     private String category;
 
-    @ToString.Exclude // to avoid recursion
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_order",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Order> orders;
+//    @ToString.Exclude // to avoid recursion
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "product_order",
+//            joinColumns = @JoinColumn(name = "order_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id")
+//    )
+//    private List<Order> orders;
 }

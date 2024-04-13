@@ -16,7 +16,7 @@
             <div class="relative h-full">
                 <div class="p-8 lg:h-[calc(100vh-60px)] lg:overflow-auto">
                     <h2 class="text-2xl font-bold text-black">Order Summary</h2>
-                    <div class="mt-10 space-y-6" th:each="item : ${order.items}">
+                    <div class="mt-10 space-y-6" th:each="item : ${order.items.keySet()}">
                         <div class="grid items-start gap-6 sm:grid-cols-2">
                             <div class="shrink-0 rounded-md bg-gray-50 px-4 py-6">
                                 <img th:src="@{'/' + ${item.imageUrl}}" src="" class="w-full object-contain" th:alt="${item.description}" alt=""/>
@@ -24,8 +24,8 @@
                             <div>
                                 <h3 class="text-base text-black"  th:text="${item.title}">Naruto: Split Sneakers</h3>
                                 <ul class="mt-4 space-y-3 text-xs text-black">
-                                    <li class="flex flex-wrap gap-4"  th:text="'Quantity:' + ${item.quantity}" >Quantity <span class="ml-auto">2</span></li>
-                                    <li class="flex flex-wrap gap-4"  th:text="'Price:' + ${item.price}*${item.quantity}">Total Price<span class="ml-auto">$40</span></li>
+                                    <li class="flex flex-wrap gap-4"  th:text="'Quantity:' + ${order.items.get(item)}" >Quantity <span class="ml-auto">2</span></li>
+                                    <li class="flex flex-wrap gap-4"  th:text="'Price:' + ${item.price}*${order.items.get(item)}">Total Price<span class="ml-auto">$40</span></li>
                                 </ul>
                             </div>
                         </div>

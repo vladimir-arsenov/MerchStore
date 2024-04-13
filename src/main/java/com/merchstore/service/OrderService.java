@@ -3,13 +3,13 @@ package com.merchstore.service;
 import com.merchstore.model.Customer;
 import com.merchstore.model.Order;
 import com.merchstore.model.Product;
-import com.merchstore.utils.records.Address;
-import com.merchstore.utils.records.Card;
 import com.merchstore.repository.OrderRepository;
 import com.merchstore.utils.OrderStatus;
+import com.merchstore.utils.records.Address;
+import com.merchstore.utils.records.Card;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class OrderService {
@@ -32,8 +32,7 @@ public class OrderService {
         // no pending order - create new order
         Order newOrder = Order.builder()
                 .status(OrderStatus.PENDING)
-                .price(0.0)
-                .items(new ArrayList<>())
+                .items(new HashMap<>())
                 .customer(customer)
                 .build();
 
@@ -56,17 +55,15 @@ public class OrderService {
         Product product = productService.getById(productId);
         Order order = getOrCreatePendingOrder(customerService.getAuthorizedCustomer());
 
-        order.getItems().add(product);
-        order.setPrice(order.getPrice() + product.getPrice());
-        product.getOrders().add(order);
-        product.setQuantity(quantity);
+        order.getItems().put(product, order.getItems().getOrDefault(product, 0) + quantity);
+        order.setPrice(order.getPrice() + product.getPrice() * quantity);
+        order.setQuantity(order.getQuantity() + quantity);
 
         orderRepository.save(order);
     }
 
     public void cancelOrder() {
         Order order = getOrCreatePendingOrder(customerService.getAuthorizedCustomer());
-        order.getItems().forEach(product -> product.getOrders().remove(order));
         orderRepository.delete(order);
     }
 }

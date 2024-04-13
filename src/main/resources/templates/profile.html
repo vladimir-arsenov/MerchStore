@@ -74,11 +74,12 @@
                     </div>
                     <div class="text-gray-700">
                         <div class="grid text-sm md:grid-cols-1">
-                            <div class="grid grid-cols-4">
+                            <div class="grid grid-cols-5">
                                 <div class="px-4 py-2 font-semibold">Date</div>
                                 <div class="px-4 py-2 font-semibold">Status</div>
                                 <div class="px-4 py-2 font-semibold">Quantity</div>
                                 <div class="px-4 py-2 font-semibold">Price</div>
+                                <div class="px-4 py-2">(Click on order to view details)</div>
                             </div>
                         </div>
                         <!-- Item -->
@@ -86,17 +87,17 @@
                             <summary class="grid text-sm md:grid-cols-1">
                                 <div class="grid grid-cols-4">
                                     <div class="px-4 py-2 " >1999</div>
-                                    <div class="px-4 py-2 " th:text="${order.getStatus()}">Delivered</div>
-                                    <div class="px-4 py-2 " th:text="${#aggregates.sum(order.items.![quantity])}">2</div>
-                                    <div class="px-4 py-2 " th:text="${order.getPrice()}">$42</div>
+                                    <div class="px-4 py-2 " th:text="${order.status}">Delivered</div>
+                                    <div class="px-4 py-2 " th:text="${order.quantity}">2</div>
+                                    <div class="px-4 py-2 " th:text="${order.price}">$42</div>
                                 </div>
                             </summary>
                             <div class="grid text-sm md:grid-cols-1" >
-                                <div class="grid grid-cols-4" th:each="item : ${order.getItems()}">
+                                <div class="grid grid-cols-4" th:each="item : ${order.items.keySet()}">
                                     <div></div>
-                                    <div class="px-4 py-2" th:text="${item.getTitle()}">Item</div>
-                                    <div class="px-4 py-2" th:text="${item.getQuantity()}">Quantity</div>
-                                    <div class="px-4 py-2" th:text="${item.price}*${item.quantity}">Price</div>
+                                    <div class="px-4 py-2" th:text="${item.title}">Item</div>
+                                    <div class="px-4 py-2" th:text="${order.items.get(item)}">Quantity</div>
+                                    <div class="px-4 py-2" th:text="${item.price}*${order.items.get(item)}">Price</div>
                                 </div>
                             </div>
                         </details>

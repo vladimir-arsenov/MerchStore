@@ -4,7 +4,8 @@ package com.merchstore.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @Builder
@@ -16,7 +17,8 @@ public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double price;
+    private double price;
+    private int quantity;
     private String status; // CLOSED, PROCESSING, PENDING
     private String card;
     private String address;
@@ -27,6 +29,12 @@ public class Order {
     private Customer customer;
 
 
-    @ManyToMany(mappedBy = "orders")
-    private List<Product> items;
+//    @ManyToMany(mappedBy = "orders")
+//    private List<Product> items;
+
+    @ElementCollection
+    @CollectionTable(name="order_item_mapping", joinColumns=@JoinColumn(name="order_id"))
+    @Column(name="quantity") // name of the value column
+    @MapKeyJoinColumn(name="product_id") // name of the key column
+    private Map<Product, Integer> items = new HashMap<>();
 }
