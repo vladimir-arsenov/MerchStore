@@ -23,4 +23,12 @@ public class CustomerService {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         return customerRepository.findByEmail(loggedInUser.getName()).orElseThrow();
     }
+
+    public void save(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    public boolean checkNoExistingEmail(String email) {
+        return customerRepository.findByEmail(email).isEmpty();
+    }
 }

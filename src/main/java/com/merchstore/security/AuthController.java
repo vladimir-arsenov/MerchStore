@@ -1,7 +1,7 @@
 package com.merchstore.security;
 
 import com.merchstore.model.Customer;
-import com.merchstore.repository.CustomerRepository;
+import com.merchstore.service.CustomerService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,22 +10,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
-// TODO use service and move to CustomerController
+
 @RestController
 public class AuthController {
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
-        this.customerRepository = customerRepository;
+    public AuthController(CustomerService customerService, PasswordEncoder passwordEncoder) {
+        this.customerService = customerService;
         this.passwordEncoder = passwordEncoder;
     }
 
+    // TODO ensure passwords match and send error otherwise
     @PostMapping("/register")
     public ModelAndView createUser(@ModelAttribute("customer") Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer.setRole("USER");
-        customerRepository.save(customer);
+        if (customerService.checkNoExistingEmail(customer.getEmail()))
+            customerService.save(customer);
+        else
+            return new ModelAndView("register").addObject("error", "This email is used");
+
         return new ModelAndView("redirect:/user/" + customer.getId());
     }
 
