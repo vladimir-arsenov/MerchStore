@@ -2,6 +2,9 @@ package com.merchstore.service;
 
 import com.merchstore.model.Product;
 import com.merchstore.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -15,12 +18,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Iterable<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(int page) {
+        Pageable pageable = PageRequest.of(page-1, 10);
+        return productRepository.findAll(pageable);
     }
 
-    public Iterable<Product> getProductsByCategory(String category) {
-        return productRepository.findProductsByCategory(category);
+    public Page<Product> getProductsByCategory(String category, int page) {
+        Pageable pageable = PageRequest.of(page-1, 10);
+        return productRepository.findProductsByCategory(category, pageable);
     }
 
     public Product getById(Long id) {

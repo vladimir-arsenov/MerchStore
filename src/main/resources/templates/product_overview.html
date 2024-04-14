@@ -63,10 +63,12 @@
         <h1 class="text-4xl ml-6 font-semibold mb-7">Similar products: </h1>
         <div  class="grid grid-rows-1 justify-start grid-flow-col gap-4 p-3 no-scrollbar overflow-auto">
             <div th:each="suggestion: ${suggestions}" class="hover:opacity-80 w-60 bg-white rounded-lg shadow-lg overflow-hidden">
+                <a th:href="@{/collections/{category}/products/{id}(category=${suggestion.category}, id=${suggestion.id})}">
                 <img th:src="@{'/' + ${suggestion.imageUrl}}" alt="Product Image" class="w-full h-2/3 " src="">
                 <div class="p-4">
                     <h2 th:text="${suggestion.title}" class="text-xl font-semibold mb-2">Product 1</h2>
                 </div>
+                </a>
             </div>
             <!-- Add more product items here -->
         </div>

@@ -1,9 +1,12 @@
 package com.merchstore.controller;
 
+import com.merchstore.model.Product;
 import com.merchstore.service.ProductService;
 import jakarta.websocket.server.PathParam;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 @RestController
@@ -15,9 +18,11 @@ public class ProductController {
     }
 
     @GetMapping(value = { "/collections/", "/collections"})
-    public ModelAndView home() {
+    public ModelAndView home(@RequestParam(name = "page", defaultValue = "1") int page) {
         ModelAndView modelAndView = new ModelAndView("product_list");
-        modelAndView.addObject("products", productService.getAllProducts());
+        Page<Product> p = productService.getAllProducts(page);
+        modelAndView.addObject("products", p.getContent());
+        modelAndView.addObject("pages", p.getTotalPages());
         return modelAndView;
     }
 
@@ -34,9 +39,14 @@ public class ProductController {
 
 
     @GetMapping("/collections/{category}")
-    public ModelAndView getProductsByCategory(@PathVariable("category") String category) {
+    public ModelAndView getProductsByCategory(
+            @PathVariable("category") String category,
+            @RequestParam(name = "page", defaultValue = "1") int page
+    ) {
         ModelAndView modelAndView = new ModelAndView("product_list");
-        modelAndView.addObject("products", productService.getProductsByCategory(category));
+        Page<Product> p = productService.getProductsByCategory(category, page);
+        modelAndView.addObject("products", p.getContent());
+        modelAndView.addObject("pages", p.getTotalPages());
         return modelAndView;
     }
 
