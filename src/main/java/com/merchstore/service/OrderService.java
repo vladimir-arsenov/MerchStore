@@ -5,8 +5,8 @@ import com.merchstore.model.Order;
 import com.merchstore.model.Product;
 import com.merchstore.repository.OrderRepository;
 import com.merchstore.utils.OrderStatus;
-import com.merchstore.utils.records.Address;
-import com.merchstore.utils.records.Card;
+import com.merchstore.utils.wrappers.Address;
+import com.merchstore.utils.wrappers.Card;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

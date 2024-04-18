@@ -1,4 +1,4 @@
-package com.merchstore.utils.records;
+package com.merchstore.utils.wrappers;
 
 
 import lombok.Data;

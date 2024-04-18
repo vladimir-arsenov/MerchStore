@@ -82,9 +82,9 @@
                     </div>
                     <h3 class="mt-6 mb-6 text-lg font-bold text-[#333]">Credit Card</h3>
                     <div class="grid gap-6 sm:grid-cols-2">
-                        <input th:value="${card.number}" type="text" name="number" placeholder="XXXX  XXXX  XXXX  XXXX" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input th:value="${card.MY}" type="text" name="MY" placeholder="MM / YY" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
-                        <input th:value="${card.cvv}" type="text" name="cvv" placeholder="CVV" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${card.number}" type="number" name="number" placeholder="XXXX  XXXX  XXXX  XXXX" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${card.MY}" type="number" name="MY" placeholder="MM / YY" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
+                        <input th:value="${card.cvv}" type="number" name="cvv" placeholder="CVV" class="w-full border-b-2 bg-white px-4 py-3.5 text-sm text-[#333] outline-none focus:border-[#333]" />
                     </div>
                     <div class="mt-10 flex gap-6 max-sm:flex-col">
                         <input type="submit"  name="cancel"  value="Cancel" class="w-full rounded-md border-2 bg-transparent px-6 py-3 text-sm font-semibold text-[#333] hover:bg-gray-100"/>

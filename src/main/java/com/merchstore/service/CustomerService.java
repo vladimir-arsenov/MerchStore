@@ -15,10 +15,6 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer getById(Long id) {
-        return customerRepository.findById(id).orElseThrow();
-    }
-
     public Customer getAuthorizedCustomer() {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         return customerRepository.findByEmail(loggedInUser.getName()).orElseThrow();
@@ -26,6 +22,13 @@ public class CustomerService {
 
     public void save(Customer customer) {
         customerRepository.save(customer);
+    }
+
+    public void updateCustomerInfo(Customer newCustomer) {
+        Customer old = getAuthorizedCustomer();
+        old.setName(newCustomer.getName());
+        old.setPhone(newCustomer.getPhone());
+        customerRepository.save(old);
     }
 
     public boolean checkNoExistingEmail(String email) {

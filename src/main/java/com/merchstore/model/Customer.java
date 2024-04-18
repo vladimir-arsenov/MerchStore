@@ -2,6 +2,7 @@ package com.merchstore.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Customer {
     private String name;
 
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 }

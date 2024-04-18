@@ -3,6 +3,8 @@ package com.merchstore.controller;
 import com.merchstore.model.Customer;
 import com.merchstore.service.CustomerService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +19,16 @@ public class CustomerController {
 
     @GetMapping("/profile")
     public ModelAndView profile() {
+        ModelAndView modelAndView = new ModelAndView("profile");
+        Customer customer = customerService.getAuthorizedCustomer();
+        modelAndView.addObject("customer", customer);
+        return modelAndView;
+    }
+
+    @PostMapping("/profile")
+    public ModelAndView profile(@ModelAttribute("customer") Customer newCustomer) {
+        customerService.updateCustomerInfo(newCustomer);
+
         ModelAndView modelAndView = new ModelAndView("profile");
         Customer customer = customerService.getAuthorizedCustomer();
         modelAndView.addObject("customer", customer);

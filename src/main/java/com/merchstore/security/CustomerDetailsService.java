@@ -19,9 +19,9 @@ public class CustomerDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
-
         return User.builder()
                 .username(customer.getEmail())
                 .password(customer.getPassword())

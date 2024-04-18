@@ -21,7 +21,6 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // TODO ensure passwords match and send error otherwise
     @PostMapping("/register")
     public ModelAndView createUser(@ModelAttribute("customer") Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
@@ -29,9 +28,9 @@ public class AuthController {
         if (customerService.checkNoExistingEmail(customer.getEmail()))
             customerService.save(customer);
         else
-            return new ModelAndView("register").addObject("error", "This email is used");
+            return new ModelAndView("register").addObject("error", "This email is taken");
 
-        return new ModelAndView("redirect:/user/" + customer.getId());
+        return new ModelAndView("redirect:/profile");
     }
 
     @GetMapping("/register")
